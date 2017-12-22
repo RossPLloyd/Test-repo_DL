@@ -130,7 +130,7 @@ The separable convolution layers extract fine grained details at first from the 
 
 The doubling-per-encoder-layer approach for the depth was used as it is commonly found in other online observed deep learning applications. Additionally as each layer halves spatially, doubling the depth means that the number of paremeters is preserved between encoder layers. Other approaches - halving per layer, or same-per-layer, lead to a diverging validation loss.
 
-**Batch Normalization Layer: **
+**Batch Normalization Layer**
 
 The batch normalization layer has a number of advantages. It makes the network train more quickly and effectively and makes it easier to find good hyperparameters. It normalises the inputs of each layer so that they have a mean output activation of zero and standard deviation of one.
 
@@ -174,12 +174,12 @@ def decoder_block(small_ip_layer, large_ip_layer, filters):
     return output_layer
 ```
 
-**Bilinear Upsampling Layer:** Up to now, the network has done the job of learning from the input data, however it is now heavily downsampled and an eigth of the desired size, required to carry out semantic segmentation. Bilinear Upsampling is a simple way of upscaling the layers, which it achieves with a form of interpolation between 'known' weights. Like the downsampling of the separable convnets in the encoders, the upsampling is performed with a factor of 2, stepping up from 20x20 in the 1x1 layer, to 40x40, to 80x80 and to 160x160.
+**Bilinear Upsampling Layer** Up to now, the network has done the job of learning from the input data, however it is now heavily downsampled and an eigth of the desired size, required to carry out semantic segmentation. Bilinear Upsampling is a simple way of upscaling the layers, which it achieves with a form of interpolation between 'known' weights. Like the downsampling of the separable convnets in the encoders, the upsampling is performed with a factor of 2, stepping up from 20x20 in the 1x1 layer, to 40x40, to 80x80 and to 160x160.
 
-**Concatenated Layer: ** As mentioned above, this layer is the concatenation, along the depth axis, of the output from the upsampled previous layer, and a skip layer connection from one of the preceding encoder outputs. One downside to convolutional nets is that, in identifying the important details, the "bigger picture" can be lost on subsequent passes through the network. By using a skip connection, the broader overall picture is retained allowing for more accurate segmentation. I have used skip connections between all layers mainly to simplify the code, however I may have achieved better results by adding them between select layers. This is something I could try in the future
+**Concatenated Layer** As mentioned above, this layer is the concatenation, along the depth axis, of the output from the upsampled previous layer, and a skip layer connection from one of the preceding encoder outputs. One downside to convolutional nets is that, in identifying the important details, the "bigger picture" can be lost on subsequent passes through the network. By using a skip connection, the broader overall picture is retained allowing for more accurate segmentation. I have used skip connections between all layers mainly to simplify the code, however I may have achieved better results by adding them between select layers. This is something I could try in the future
 
 
-**Separable Convolutions: ** Each decoder has two separable convolutions. Again the aim here is to provide finer and finer detail on which pixels belong to which object in the image. The dimensions remain the same as each respective upsample due to same padding, stride of one and a kernel size of 3. This seemed to be the most effective kernel size as going over it seemed to reduce the overall score.
+**Separable Convolutions** Each decoder has two separable convolutions. Again the aim here is to provide finer and finer detail on which pixels belong to which object in the image. The dimensions remain the same as each respective upsample due to same padding, stride of one and a kernel size of 3. This seemed to be the most effective kernel size as going over it seemed to reduce the overall score.
 
 **Output layer:** The final layer features a softmax activation in order to classify the outputs into 3 classes, which are hero, non-hero character and background. 
 
