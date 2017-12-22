@@ -187,8 +187,7 @@ def decoder_block(small_ip_layer, large_ip_layer, filters):
 
 The values which I used for the final submission, which attained a result of just under 43%, are listed below:
 
-learning_rate = 0.004
-
+* learning_rate = 0.004
 * batch_size = 40
 * num_epochs = 100
 * steps_per_epoch = 100
