@@ -186,12 +186,15 @@ def decoder_block(small_ip_layer, large_ip_layer, filters):
 # Section 2 - Hyperparameters, Training and Results
 
 The values which I used for the final submission, which attained a result of just under 43%, are listed below:
+
 learning_rate = 0.004
-batch_size = 40
-num_epochs = 100
-steps_per_epoch = 100
-validation_steps = 50
-workers = 3
+
+* batch_size = 40
+* num_epochs = 100
+* steps_per_epoch = 100
+* validation_steps = 50
+* workers = 3
+
 I arrived at these parameters primarily by experimentation. In general the parameter which had the greatest impact was the learning rate (essentially the amount each weight is able to update itself on each iteration through the network). Our network includes batch normalization, which tends to allow for a wider range of effective hyperparameters. Though reasonable results were obtained with higher learning rates, they did not reach the required 40% cutoff. Once I experimented in the 10e-3 range, I started to see final IoU scores over 40.
 
 **Results table using a learning rate of 0.003 amd same other parameters as above**
