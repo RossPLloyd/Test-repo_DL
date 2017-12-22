@@ -205,11 +205,11 @@ Increasing **batch size** past 42 caused me to experience out of memory errors w
 However I found that this did not work as well as when I, by chance, used half that number. My most successful set is with the numbers above, which when multiplied up gives 4000 for training images and 2000 for validation images. I suspect this may be due to overfitting, evidenced by a slowly diverging validation loss, possibly caused by overcapacity in the network. One future experiment may be to create a more compact network, either with fewer encoder / decoder layers or with shallower depths per layer. Another option would be to add some extra regularization such as L1 or L2.
 
 **Results when using larger steps per epoch and hence mathematically full image set per epoch**
-![large steps](../images/parameter set 2.png)
+![large steps](../images/parameter_set_2.png)
 
 **Number of Epochs** was again arrived at through experimentation. For my three encoder / three decoder network, I found that a low number of epochs (15, 25, 50) did not allow me to reach the cutoff of 40%. Once I began looking in the 100 epoch range, the figure eventually, alongside tweaking the learning rate, reached 42.7%. The validation loss and training loss continued on a downward trend, the former indicating that this particular combination did not suffer from overfitting:
 
-![data](../images/100 epochs final.png)
+![data](../images/100_epochs_final.png)
 
 Experimentation with worker number did not appear to have much effect and it relates to the number of parallel threads running. As I have a fairly powerful GPU I decided to just increase the number by one over default. The processing time appeared to be most heavily impacted by batch size and so mostly I left worker number alone.
 
